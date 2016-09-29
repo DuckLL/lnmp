@@ -17,7 +17,7 @@ RUN apt-get update \
 
 # install lnmp
 RUN wget http://soft.vpser.net/lnmp/lnmp1.3.tar.gz && tar -xvf ./lnmp1.3.tar.gz \
-&& cd lnmp1.3 && wget https://raw.githubusercontent.com/DuckLL/lnmp/master/lnmp.conf && cat lnmp.conf | ./install.sh \
+&& cd lnmp1.3 && wget https://raw.githubusercontent.com/DuckLL/lnmp/master/lnmp.install && cat lnmp.install | ./install.sh \
 && cd ../ && rm -rf lnmp1.3.tar.gz lnmp1.3
 
 # set lnmp start
