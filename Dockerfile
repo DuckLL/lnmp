@@ -1,23 +1,17 @@
-FROM phusion/baseimage:latest
+FROM duckll/base
 
 MAINTAINER DuckLL <a347liao@gmail.com>
 
 EXPOSE 80
 
-CMD ["/sbin/my_init"]
-
 # apt-get
-RUN apt-get update \
-&& apt-get upgrade -y \
-&& apt-get install -yq \
-    vim \
-    wget \
+RUN apt-fast -y install \
     net-tools \
-&& apt-get clean
+&& apt-fast clean
 
 # install lnmp
 RUN wget http://soft.vpser.net/lnmp/lnmp1.3.tar.gz && tar -xvf ./lnmp1.3.tar.gz \
-&& cd lnmp1.3 && wget https://raw.githubusercontent.com/DuckLL/lnmp/master/lnmp.install && cat lnmp.install | ./install.sh \
+&& cd lnmp1.3 && wget https://raw.githubusercontent.com/DuckLL/lnmp/master/install.conf && cat install.conf | ./install.sh \
 && cd ../ && rm -rf lnmp1.3.tar.gz lnmp1.3
 
 # set lnmp start
