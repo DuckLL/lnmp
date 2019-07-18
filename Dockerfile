@@ -1,20 +1,23 @@
 FROM duckll/base
 
-MAINTAINER DuckLL <a347liao@gmail.com>
+COPY lnmp.sh /etc/my_init.d/lnmp.sh
+COPY install.conf /tmp/install.conf
 
 EXPOSE 80
 
 # apt-get
-RUN apt-fast update \
-&& apt-fast -y install \
+RUN apt update \
+&& apt -y install \
    net-tools \
-&& apt-fast clean \
 
 # install lnmp
-&& wget http://soft.vpser.net/lnmp/lnmp1.3.tar.gz && tar -xvf ./lnmp1.3.tar.gz \
-&& cd lnmp1.3 && wget https://raw.githubusercontent.com/DuckLL/lnmp/master/install.conf && cat install.conf | ./install.sh \
-&& cd ../ && rm -rf lnmp1.3.tar.gz lnmp1.3 \
+&& cd /tmp \
+&& wget http://soft.vpser.net/lnmp/lnmp1.6.tar.gz && tar -xvf ./lnmp1.6.tar.gz \
+&& cd lnmp1.6 && cat /tmp/install.conf | ./install.sh \
 
 # set lnmp start
-&& wget https://raw.githubusercontent.com/DuckLL/lnmp/master/lnmp.sh -O /etc/my_init.d/lnmp.sh \
 && chmod +x /etc/my_init.d/lnmp.sh
+
+# cleanup
+&& apt clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
