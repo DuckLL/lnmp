@@ -16,7 +16,7 @@ RUN apt update \
 && cd lnmp1.6 && cat /tmp/install.conf | ./install.sh \
 
 # set lnmp start
-&& chmod +x /etc/my_init.d/lnmp.sh
+&& chmod +x /etc/my_init.d/lnmp.sh \
 
 # cleanup
 && apt clean \
