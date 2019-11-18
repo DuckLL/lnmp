@@ -12,8 +12,10 @@ RUN apt update \
 
 # install lnmp
 && cd /tmp \
-&& wget http://soft.vpser.net/lnmp/lnmp1.6.tar.gz && tar -xvf ./lnmp1.6.tar.gz \
-&& cd lnmp1.6 && cat /tmp/install.conf | ./install.sh \
+&& wget http://soft.vpser.net/lnmp/lnmp1.6.tar.gz \
+&& tar -xvf ./lnmp1.6.tar.gz \
+&& cd lnmp1.6 \
+&& ./install.sh < /tmp/install.conf \
 
 # set lnmp start
 && chmod +x /etc/my_init.d/lnmp.sh \
